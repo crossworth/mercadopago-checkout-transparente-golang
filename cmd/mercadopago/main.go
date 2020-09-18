@@ -7,29 +7,35 @@ import (
 )
 
 const (
-	MercadoPagoPublicKey = ``
-	MercadoPagoSecretKey = ``
+	MercadoPagoPublicKey   = ``
+	MercadoPagoAccessToken = ``
 )
 
 func main() {
-	ct := CheckoutTransparente{}
+	ct := CheckoutTransparente{
+		MercadoPagoPublicKey:   MercadoPagoPublicKey,
+		MercadoPagoAccessToken: MercadoPagoAccessToken,
+	}
 
 	http.HandleFunc("/", ct.CheckoutPage)
 	http.HandleFunc("/process_payment", ct.ProcessPayment)
 
 	log.Println("Servidor iniciado na porta 8080")
-	log.Println(http.ListenAndServe(":8080", nil))
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Println(err)
+	}
 }
 
 type CheckoutTransparente struct {
-	MercadoPagoPublicKey string
+	MercadoPagoPublicKey   string
+	MercadoPagoAccessToken string
 }
 
 type CheckoutData struct {
 	MercadoPagoPublicKey string
 }
 
-func (c *CheckoutTransparente) CheckoutPage(w http.ResponseWriter, r *http.Request)  {
+func (c *CheckoutTransparente) CheckoutPage(w http.ResponseWriter, r *http.Request) {
 	tpl, err := template.ParseFiles("./checkout.gohtml")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

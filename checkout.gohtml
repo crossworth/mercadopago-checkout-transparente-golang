@@ -2,72 +2,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout transparente MercadoPago</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgba(237, 242, 247, 1) !important;
+        }
+    </style>
 </head>
 <body>
-<form action="/process_payment" method="post" id="paymentForm">
-    <h3>Detalhe do comprador</h3>
+<form action="/process_payment" method="post" id="paymentForm"
+      class="w-3/4 bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 mx-auto">
+
+    <h3 class="text-xl text-gray-900 leading-tight mb-4">Valor</h3>
     <div>
-        <div>
-            <label for="email">E-mail</label>
-            <input id="email" name="email" type="text" value="test@test.com"></select>
-        </div>
-        <div>
-            <label for="docType">Tipo de documento</label>
-            <select id="docType" name="docType" data-checkout="docType" type="text"></select>
-        </div>
-        <div>
-            <label for="docNumber">Número do documento</label>
-            <input id="docNumber" name="docNumber" data-checkout="docNumber" type="text"/>
+        <div class="mb-2">
+            <label for="email" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Valor</label>
+            <input id="transactionAmount" name="transactionAmount" type="number" value="100"
+                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
         </div>
     </div>
-    <h3>Detalhes do cartão</h3>
+
+    <h3 class="text-xl text-gray-900 leading-tight mb-4">Detalhe do comprador</h3>
     <div>
-        <div>
-            <label for="cardholderName">Titular do cartão</label>
-            <input id="cardholderName" data-checkout="cardholderName" type="text">
+        <div class="mb-2">
+            <label for="email" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">E-mail</label>
+            <input id="email" name="email" type="text" value="test@test.com"
+                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
         </div>
-        <div>
-            <label for="">Data de vencimento</label>
-            <div>
+        <div class="mb-2">
+            <label for="docType" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Tipo de
+                documento</label>
+            <select id="docType" name="docType" data-checkout="docType"
+                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></select>
+        </div>
+        <div class="mb-2">
+            <label for="docNumber" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Número do
+                documento</label>
+            <input id="docNumber" name="docNumber" data-checkout="docNumber" type="text"
+                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+        </div>
+    </div>
+    <h3 class="text-xl text-gray-900 leading-tight mb-4">Detalhes do cartão</h3>
+    <div>
+        <div class="mb-2">
+            <label for="cardholderName" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Titular
+                do cartão</label>
+            <input id="cardholderName" data-checkout="cardholderName" type="text"
+                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+        </div>
+        <div class="mb-2">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Data de vencimento
+                <br/>
                 <input type="text" placeholder="MM" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
-                       onselectstart="return false" onpaste="return false"
-                       oncopy="return false" oncut="return false"
-                       ondrag="return false" ondrop="return false" autocomplete=off>
+                       autocomplete="off"
+                       class="w-16 appearance-none inline-block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
                 <span class="date-separator">/</span>
                 <input type="text" placeholder="YY" id="cardExpirationYear" data-checkout="cardExpirationYear"
-                       onselectstart="return false" onpaste="return false"
-                       oncopy="return false" oncut="return false"
-                       ondrag="return false" ondrop="return false" autocomplete=off>
-            </div>
+                       autocomplete="off"
+                       class="w-16 appearance-none inline-block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+            </label>
+        </div>
+        <div class="mb-2">
+            <label for="cardNumber" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Número do
+                cartão</label>
+            <input type="text" id="cardNumber" data-checkout="cardNumber" autocomplete="off"
+                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+        </div>
+        <div class="mb-2">
+            <label for="securityCode" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Código
+                de segurança</label>
+            <input id="securityCode" data-checkout="securityCode" type="text" autocomplete="off"
+                   class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+        </div>
+        <div class="mb-2" id="issuerInput">
+            <label for="issuer" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Banco
+                emissor</label>
+            <select id="issuer" name="issuer" data-checkout="issuer"
+                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></select>
+        </div>
+        <div class="mb-2">
+            <label for="installments" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Parcelas</label>
+            <select id="installments" name="installments"
+                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></select>
         </div>
         <div>
-            <label for="cardNumber">Número do cartão</label>
-            <input type="text" id="cardNumber" data-checkout="cardNumber"
-                   onselectstart="return false" onpaste="return false"
-                   oncopy="return false" oncut="return false"
-                   ondrag="return false" ondrop="return false" autocomplete=off>
-        </div>
-        <div>
-            <label for="securityCode">Código de segurança</label>
-            <input id="securityCode" data-checkout="securityCode" type="text"
-                   onselectstart="return false" onpaste="return false"
-                   oncopy="return false" oncut="return false"
-                   ondrag="return false" ondrop="return false" autocomplete=off>
-        </div>
-        <div id="issuerInput">
-            <label for="issuer">Banco emissor</label>
-            <select id="issuer" name="issuer" data-checkout="issuer"></select>
-        </div>
-        <div>
-            <label for="installments">Parcelas</label>
-            <select type="text" id="installments" name="installments"></select>
-        </div>
-        <div>
-            <input type="hidden" name="transactionAmount" id="transactionAmount" value="100" />
-            <input type="hidden" name="paymentMethodId" id="paymentMethodId" />
-            <input type="hidden" name="description" id="description" />
+            <input type="hidden" name="paymentMethodId" id="paymentMethodId"/>
+            <input type="hidden" name="description" id="description"/>
             <br>
-            <button type="submit">Pagar</button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pagar
+            </button>
             <br>
         </div>
     </div>
@@ -81,11 +104,11 @@
   document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
 
   function guessPaymentMethod(event) {
-    let cardnumber = document.getElementById("cardNumber").value;
+    let cardnumber = document.getElementById('cardNumber').value;
     if (cardnumber.length >= 6) {
-      let bin = cardnumber.substring(0,6);
+      let bin = cardnumber.substring(0, 6);
       window.Mercadopago.getPaymentMethod({
-        "bin": bin
+        'bin': bin
       }, setPaymentMethod);
     }
   };
@@ -95,7 +118,7 @@
       let paymentMethod = response[0];
       document.getElementById('paymentMethodId').value = paymentMethod.id;
 
-      if(paymentMethod.additional_info_needed.includes("issuer_id")){
+      if (paymentMethod.additional_info_needed.includes('issuer_id')) {
         getIssuers(paymentMethod.id);
       } else {
         getInstallments(
@@ -118,7 +141,7 @@
   function setIssuers(status, response) {
     if (status == 200) {
       let issuerSelect = document.getElementById('issuer');
-      response.forEach( issuer => {
+      response.forEach(issuer => {
         let opt = document.createElement('option');
         opt.text = issuer.name;
         opt.value = issuer.id;
@@ -135,18 +158,18 @@
     }
   }
 
-  function getInstallments(paymentMethodId, transactionAmount, issuerId){
+  function getInstallments(paymentMethodId, transactionAmount, issuerId) {
     window.Mercadopago.getInstallments({
-      "payment_method_id": paymentMethodId,
-      "amount": parseFloat(transactionAmount),
-      "issuer_id": issuerId ? parseInt(issuerId) : undefined
+      'payment_method_id': paymentMethodId,
+      'amount': parseFloat(transactionAmount),
+      'issuer_id': issuerId ? parseInt(issuerId) : undefined
     }, setInstallments);
   }
 
-  function setInstallments(status, response){
+  function setInstallments(status, response) {
     if (status == 200) {
       document.getElementById('installments').options.length = 0;
-      response[0].payer_costs.forEach( payerCost => {
+      response[0].payer_costs.forEach(payerCost => {
         let opt = document.createElement('option');
         opt.text = payerCost.recommended_message;
         opt.value = payerCost.installments;
@@ -159,9 +182,10 @@
 
   doSubmit = false;
   document.getElementById('paymentForm').addEventListener('submit', getCardToken);
-  function getCardToken(event){
+
+  function getCardToken(event) {
     event.preventDefault();
-    if(!doSubmit){
+    if (!doSubmit) {
       let $form = document.getElementById('paymentForm');
       window.Mercadopago.createToken($form, setCardTokenAndPay);
       return false;
@@ -176,10 +200,10 @@
       card.setAttribute('type', 'hidden');
       card.setAttribute('value', response.id);
       form.appendChild(card);
-      doSubmit=true;
+      doSubmit = true;
       form.submit();
     } else {
-      alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
+      alert('Verify filled data!\n' + JSON.stringify(response, null, 4));
     }
   };
 </script>
